@@ -107,7 +107,7 @@
 			<div id="postbox-container-1" class="postbox-container">
 
 				<div class="meta-box-sortables">
-
+				<!-- <?php if (isset($jgnyt_search) || $jgnyt_search !== "" ): ?> -->
 					<div class="postbox">
 
 						<button type="button" class="handlediv" aria-expanded="true" >
@@ -120,12 +120,14 @@
 
 						<div class="inside">
 							<form method = "post" action="">
+							<input type="hidden" name = "jgnyt_form_submited" value = "Y"></input>
+
 								<p>
-									<input name = "jgnyt_search" id = "jgnyt_search" type="text" value="Search String" class="all-options"/>
-									<input name = "jgnyt_apikey" id = "jgnyt_apikey" type="text" value="APIKey" class="all-options"/>
+									<input name = "jgnyt_search" id = "jgnyt_search" type="text" value= <?php echo $jgnyt_search ?> class="all-options"/>
+									<input name = "jgnyt_apikey" id = "jgnyt_apikey" type="text" value= <?php echo $jgnyt_apikey ?> class="all-options"/>
 								</p>
 								<p>
-									<input class="button-primary" type="submit" name="jgnyt_form_submit" value="Save" />
+									<input class="button-primary" type="submit" name="jgnyt_form_submit" value="Update" />
 								</p>
 							</form>
 							
@@ -133,7 +135,9 @@
 						<!-- .inside -->
 
 					</div>
+					<?php endif ?>
 					<!-- .postbox -->
+					
 
 				</div>
 				<!-- .meta-box-sortables -->

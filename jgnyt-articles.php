@@ -62,7 +62,7 @@ function jgnyt_articles_options_page (){
 	} 
 	//if reload the webpage we get the options for ddbb
 	$options = get_option( "jgnyt_articles");
-	var_dump ($options);
+	// var_dump ($options);
 	
 	if ($options !== "") {
 		$jgnyt_search = $options["jgnyt_search"];
