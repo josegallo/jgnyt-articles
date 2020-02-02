@@ -51,7 +51,7 @@ function jgnyt_articles_options_page (){
 		if ($hidden_field =="Y"){
 			$jgnyt_search = esc_html( $_POST["jgnyt_search"] );
 			$jgnyt_apikey = esc_html( $_POST["jgnyt_apikey"] );
-			echo $jgnyt_search . $jgnyt_apikey;
+			// echo $jgnyt_search . $jgnyt_apikey;
 
 			//Each time the API Key is updated is stored on ddbb
 			$options["jgnyt_search"]= $jgnyt_search;
@@ -62,13 +62,13 @@ function jgnyt_articles_options_page (){
 	} 
 	//if reload the webpage we get the options for ddbb
 	$options = get_option( "jgnyt_articles");
-
+	var_dump ($options);
+	
 	if ($options !== "") {
-		$options["jgnyt_search"]= $jgnyt_search;
-		$options["jgnyt_apikey"] = $jgnyt_apikey;
+		$jgnyt_search = $options["jgnyt_search"];
+		$jgnyt_apikey = $options["jgnyt_apikey"];
 	}
 
-	
 	//instert blocks of the section
 	require('inc/options-page-wrapper.php');
 }
