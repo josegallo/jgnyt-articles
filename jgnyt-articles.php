@@ -15,6 +15,7 @@
 
 //create global variable for url plugin
 $plugin_url = WP_PLUGIN_URL . '/jgnty-articles';
+$options = array();
 
 //create page on the admin page. Section Settings
 
@@ -34,6 +35,10 @@ add_action('admin_menu', 'jgnyt_articles_menu'); //hook function jgnyt_articles_
 
 //add back-end dashboard (file ) options-page-wrapper.php
 function jgnyt_articles_options_page (){
+
+	global $options;
+	global $plugin_url;
+		
 	//check if user has permissions
 	if (!current_user_can('manage_options')) { //if user can not manage options
 		wp_die("You don't have enough permisions"); //throw eror
@@ -47,11 +52,23 @@ function jgnyt_articles_options_page (){
 			$jgnyt_search = esc_html( $_POST["jgnyt_search"] );
 			$jgnyt_apikey = esc_html( $_POST["jgnyt_apikey"] );
 			echo $jgnyt_search . $jgnyt_apikey;
+
+			//Each time the API Key is updated is stored on ddbb
+			$options["jgnyt_search"]= $jgnyt_search;
+			$options["jgnyt_apikey"] = $jgnyt_apikey;
+			$options['time'] = time();
+			update_option( "jgnyt_articles", $options);	
 		}
-		
 	} 
+	//if reload the webpage we get the options for ddbb
+	$options = get_option( "jgnyt_articles");
+
+	if ($options !== "") {
+		$options["jgnyt_search"]= $jgnyt_search;
+		$options["jgnyt_apikey"] = $jgnyt_apikey;
+	}
+
 	
-	global $plugin_url;
 	//instert blocks of the section
 	require('inc/options-page-wrapper.php');
 }
